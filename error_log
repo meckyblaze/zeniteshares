@@ -1,0 +1,9 @@
+[10-Jul-2017 14:09:45 Africa/Lagos] PHP Warning:  mysqli::mysqli(): (HY000/2002): Connection refused in /home/firstbir/public_html/perfundswallet.com/index.php on line 30
+[10-Jul-2017 14:09:48 Africa/Lagos] PHP Warning:  mysqli::mysqli(): (HY000/2002): Connection refused in /home/firstbir/public_html/perfundswallet.com/index.php on line 30
+[10-Jul-2017 14:11:10 Africa/Lagos] PHP Warning:  mysqli::mysqli(): (HY000/2002): Connection refused in /home/firstbir/public_html/perfundswallet.com/index.php on line 30
+[10-Jul-2017 14:11:13 Africa/Lagos] PHP Warning:  mysqli::mysqli(): (HY000/2002): Connection refused in /home/firstbir/public_html/perfundswallet.com/index.php on line 30
+[10-Jul-2017 14:35:03 Africa/Lagos] PHP Fatal error:  Call to a member function fetch_assoc() on a non-object in /home/firstbir/public_html/perfundswallet.com/index.php on line 103
+[31-Jul-2017 06:22:50 Africa/Lagos] PHP Warning:  mysqli::mysqli(): (HY000/1040): Too many connections in /home/firstbir/public_html/perfundswallet.com/forgot.php on line 21
+[03-Aug-2017 09:19:09 Africa/Lagos] PHP Warning:  mysqli::mysqli(): (HY000/2002): No such file or directory in /home/firstbir/public_html/perfundswallet.com/index.php on line 28
+[11-Aug-2017 04:49:02 Africa/Lagos] PHP Warning:  mysqli::mysqli(): (HY000/2002): Connection refused in /home/firstbir/public_html/perfundswallet.com/index.php on line 28
+[11-Aug-2017 04:49:03 Africa/Lagos] PHP Warning:  mysqli::mysqli(): (HY000/2002): Connection refused in /home/firstbir/public_html/perfundswallet.com/index.php on line 28
