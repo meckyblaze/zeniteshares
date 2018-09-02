@@ -1,15 +1,4 @@
-<?php
-session_start();
 
-?>
-<?php
-
-if ($_SERVER['HTTP_HOST'] == "zeniteshares.com")
-{
-   $url = "https://www." . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-   header("Location: $url");
-} 
-?>
 
 <!--
 Author: W3layouts
@@ -18,113 +7,7 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE html>
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "zeniteshares";
-$date = date('m-d-Y');
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-	
 
-    // If the values are posted, insert them into the database.
-   if (isset($_POST['email'])){ 
-$password = $_POST['password'];
-$cpassword = $_POST['cpassword'];
-if ($cpassword != $password){
-    $ymsg = "Passwords Dont match.";
-    
-}else{
-if (isset($_POST['email'])){
-        
-$name = $_POST['name'];
-
-	$email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $password = $_POST['password'];
-      $referer = $_POST['referer'];
-$bankname = $_POST['bankname'];
-$bankacname = $_POST['bankacname'];
-$bankacnumber = $_POST['bankacnumber'];
-if ($email == $referer){
-    $ymsg = "You are not allowed to refer your self.";
-    
-}else{
- 
-   $sql = "SELECT * FROM register WHERE email='$email'";
-$result = $conn->query($sql);
-if ($result->num_rows > 0 ) {
-$xmsg = "User already exists.";
-}else{
-        $sql = "SELECT * FROM referer WHERE referer = '$referer'";
-$result = $conn->query($sql);
-if ($result->num_rows > 0 ) {
-    $sql = "SELECT * FROM referer WHERE referer = '$referer'";
-$result = $conn->query($sql);
-while($row = $result->fetch_assoc()) {
-          $referer = $row['referer'];
-           $no = $row['no'];
-          $update = $no + 1;
-}
-    $sql = "UPDATE referer SET no='$update' WHERE referer='$referer'";
-if ($conn->query($sql) === TRUE) {
-echo"";
-}
-}else{
-    
-     $query = "INSERT INTO referer (referer, no) VALUES ('$referer', '0')";
-
-       $result = mysqli_query($conn, $query);
-        if($result){
-            
- 
-       }
-}
-$query = "INSERT INTO pghtable (email, amountph, amountgh, cgh) VALUES ('$email', '0', '0', '0')";
-
-       $result = mysqli_query($conn, $query);
-        if($result){
-       
- 
-       }
-       $query = "INSERT INTO referer (referer, no, a) VALUES ('$email', '0', '$referer')";
-
-       $result = mysqli_query($conn, $query);
-        if($result){
-       
- 
-       }
-      
-$encrypt=md5($email);
-$pass=$password;
-$to = "$email";
-$subject = "REGISTRATION DETAILS";
-$from= "....";
-$headers = "From:support@zeniteshares.com" . $from;
-$data = "\r\n$name You are Welcome to Zeniteshares kindly click on the link below to verify email  \r\n https://zeniteshares.com/verify/?email=$encrypt\r\ncopy link and paste in browser if not clickable.\r\n(this is an automated email and cant receive responses).";
-mail($to,$subject,$data,$headers);
-$encrypt=md5($email);
-      $query = "INSERT INTO register (name, email, phone, password, bank, bankacname, bankacnumber, verify, blocked) VALUES ('$name', '$email', '$phone', '$pass', '$bankname', '$bankacname', '$bankacnumber', '$encrypt', '1')";
-
-       $result = mysqli_query($conn, $query);
-        if($result){
-            $smsg = "Your registration was successful. Please verify your email with the link Sent(check spam if not in inbox).";
- 
-       }else{
-
-            $fmsg ="User Registration Failed";
-  
-      }
-   }
-}   
- }
-   }
-} 
 ?>
 <html lang="en">
 <head>
@@ -168,64 +51,7 @@ $encrypt=md5($email);
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top"> 
-     <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "zeniteshares";
-$date = date('d-m-Y H:m:s');
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-	
-
-    // If the values are posted, insert them into the database.
-    
-if (isset($_POST['Email'])){
-    $Email = $_POST['Email'];
-$Password = $_POST['Password'];
-$sql = "SELECT email,password FROM register WHERE email='$Email' AND 
-
-password='$Password'";
-$result = $conn->query($sql);
-if ($result->num_rows == 0 ) {
-    $fmsg="User Doesnt Exist OR Account Has Been Deleted... If you think this is an error, kindly send us a mail through the link on the bottom page.";
-}else{
-$sql = "SELECT email,verify FROM register WHERE email='$Email' AND 
-
-verify='1'";
-$result = $conn->query($sql);
-if ($result->num_rows == 0 ) {
-    $fmsg="your email has not been verified";
-}else{
-$sql = "SELECT email,blocked FROM register WHERE email='$Email' AND 
-
-blocked='1'";
-$result = $conn->query($sql);
-if ($result->num_rows == 0) {
-	$_SESSION["email"] = "$Email";
-$_SESSION["password"] = "$Password";
-	sleep(5);
-	echo '<script>window.location = 
-
-"aal/blocked.php"</script>';
-}else{
-
-    $_SESSION["email"] = "$Email";
-$_SESSION["password"] = "$Password";
-$smsg="Loging in...";
-sleep(2);
-    echo '<script>window.location = 
-
-"aal/po.php"</script>';
-}
- }   
-}
-}
-?> 
+     
 	<!-- banner -->
 	<div id="home" class="w3ls-banner"> 
 
@@ -238,15 +64,7 @@ sleep(2);
 
 							<div class="container">
 								<div class="agileits-banner-info">
-								 <?php if(isset($smsg)){ ?><div class="alert alert-success" role="alert"> 
-<?php echo $smsg; ?> </div><?php } ?>
-   
-   <?php if(isset($fmsg)){ ?><div class="alert alert-danger" role="alert"> 
-<?php echo $fmsg; ?> </div><?php } ?>
-<?php if(isset($xmsg)){ ?><div class="alert alert-danger" role="alert"> 
-<?php echo $xmsg; ?> </div><?php } ?>
-<?php if(isset($ymsg)){ ?><div class="alert alert-danger" role="alert"> 
-<?php echo $ymsg; ?> </div><?php } ?>
+								 
  
 
 
@@ -264,16 +82,6 @@ sleep(2);
 						<div class="w3layouts-banner-top w3layouts-banner-top1">
 							<div class="container">
 								<div class="agileits-banner-info">
-								 <?php if(isset($smsg)){ ?><div class="alert alert-success" role="alert"> 
-<?php echo $smsg; ?> </div><?php } ?>
-   
-   <?php if(isset($fmsg)){ ?><div class="alert alert-danger" role="alert"> 
-<?php echo $fmsg; ?> </div><?php } ?>
-<?php if(isset($xmsg)){ ?><div class="alert alert-danger" role="alert"> 
-<?php echo $xmsg; ?> </div><?php } ?>
-<?php if(isset($ymsg)){ ?><div class="alert alert-danger" role="alert"> 
-<?php echo $ymsg; ?> </div><?php } ?>
- 
 
 
 
@@ -291,17 +99,7 @@ sleep(2);
 						<div class="w3layouts-banner-top w3layouts-banner-top2">
 							<div class="container">
 								<div class="agileits-banner-info">
-								   <?php if(isset($smsg)){ ?><div class="alert alert-success" role="alert"> 
-								<?php echo $smsg; ?> </div><?php } ?>
-   
-   <?php if(isset($fmsg)){ ?><div class="alert alert-danger" role="alert"> 
-<?php echo $fmsg; ?> </div><?php } ?>
-<?php if(isset($xmsg)){ ?><div class="alert alert-danger" role="alert"> 
-<?php echo $xmsg; ?> </div><?php } ?>
-<?php if(isset($ymsg)){ ?><div class="alert alert-danger" role="alert"> 
-<?php echo $ymsg; ?> </div><?php } ?>
-
-
+								  
 
 
 									<h3>Look Always Only <span>Successful</span></h3>
@@ -421,15 +219,7 @@ sleep(2);
 			<div id="small-dialog" class="mfp-hide book-form">
 				<h4>Sign Up Form </h4>
 				<form class="form-signin" method="post">
-				     <?php if(isset($smsg)){ ?><div class="alert alert-success" role="alert"> 
-<?php echo $smsg; ?> </div><?php } ?>
-   
-   <?php if(isset($fmsg)){ ?><div class="alert alert-danger" role="alert"> 
-<?php echo $fmsg; ?> </div><?php } ?>
-<?php if(isset($xmsg)){ ?><div class="alert alert-danger" role="alert"> 
-<?php echo $xmsg; ?> </div><?php } ?>
-<?php if(isset($ymsg)){ ?><div class="alert alert-danger" role="alert"> 
-<?php echo $ymsg; ?> </div><?php } ?>
+				     
  
 					   <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" required name="name"></p>
      <p><input class="w3-input w3-padding-16 w3-border" type="email" placeholder="email" required name="email"></p>
@@ -540,16 +330,7 @@ confirm_password.onkeyup = validatePassword;
 		</div>
 	</div>
 </div>
-		     <?php if(isset($smsg)){ ?><div class="alert alert-success" role="alert"> 
-<?php echo $smsg; ?> </div><?php } ?>
-   
-   <?php if(isset($fmsg)){ ?><div class="alert alert-danger" role="alert"> 
-<?php echo $fmsg; ?> </div><?php } ?>
-<?php if(isset($xmsg)){ ?><div class="alert alert-danger" role="alert"> 
-<?php echo $xmsg; ?> </div><?php } ?>
-<?php if(isset($ymsg)){ ?><div class="alert alert-danger" role="alert"> 
-<?php echo $ymsg; ?> </div><?php } ?>
-
+		   
 <!-- //counter -->
 	
    <!--/price -->
@@ -563,35 +344,7 @@ confirm_password.onkeyup = validatePassword;
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
 										<h4>Sign up Form</h4>
 										<form class="form-signin"  method="post">
-				     <?php if(isset($smsg)){ ?><div class="alert alert-success" role="alert"> 
-<?php echo $smsg; ?> </div><?php } ?>
-   
-   <?php if(isset($fmsg)){ ?><div class="alert alert-danger" role="alert"> 
-<?php echo $fmsg; ?> </div><?php } ?>
-<?php if(isset($xmsg)){ ?><div class="alert alert-danger" role="alert"> 
-<?php echo $xmsg; ?> </div><?php } ?>
-<?php if(isset($ymsg)){ ?><div class="alert alert-danger" role="alert"> 
-<?php echo $ymsg; ?> </div><?php } ?>
-<?php
-// Example 1
-	$sql = "SELECT * FROM referer WHERE id = 2";
-$result = $conn->query($sql);
-while($row = $result->fetch_assoc()){
-	$emaili = $row['referer'];
-}
-	
-if ($emaili = ""){
-	echo"";
-}else
-
-	$sql = "SELECT * FROM referer WHERE id = 2";
-$result = $conn->query($sql);
-while($row = $result->fetch_assoc()){
-	$emaili = $row['referer'];
-}
-
-
-?>
+				    
 					   <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" required name="name"></p>
      <p><input class="w3-input w3-padding-16 w3-border" type="email" placeholder="email" required name="email"></p>
       <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Phone" required name="phone"></p>
